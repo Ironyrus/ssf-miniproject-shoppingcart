@@ -1,0 +1,6 @@
+item name,quantity
+apple,11
+lemon,1
+peach,2
+nintendo,5
+oranges,3

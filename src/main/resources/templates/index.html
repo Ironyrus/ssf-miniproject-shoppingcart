@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>Main Page</title>
+        <link th:href="styles.css" rel="stylesheet" /> <!-- CSS files must be under static folder-->
+        <script type="text/javascript" th:src="@{actions.js}"></script>
+
+    </head>
+    <body>
+        <form action="#"
+            th:action="@{/showCart}"
+            th:object="${cart}"
+            method="post">
+            <br>
+            Username: <input type="text" th:field="*{name}" placeholder="name" />
+            <br><br>
+            Item: <input type="text" th:field="*{item}" placeholder="item" />
+            
+            <input type="submit" value="+" />
+            
+        </form>
+
+        <h1 >Retrieve Data</h1>
+        <p id="para">Cart contains: </p>
+        <!-- <table> -->
+        <ul th:each="item, iStat: ${data}" class="form-inline">
+            <!-- <form action="delete" method="post" class="form-inline"> -->
+                <li data-th-text="${item}" id="item"></li> <!--Displays each item from the cart-->
+                <form   action="#"
+                        th:action="@{/delete}"
+                        th:object="${cart}"
+                        method="post"> 
+                        &nbsp;&nbsp; 
+                    <input type="hidden" name="deletedItem" th:value="${iStat.count}" /> <!-- Submits index to server based on which delete button was pressed -->
+                    <input type="hidden" name="name" th:value="*{name}" />
+                    <!-- <input type="hidden" name="item" th:value="*{item}" /> -->
+                    <input type="submit" name="btnSubmit" onclick="deleteItem()" value="delete" />
+                </form>
+                &nbsp;
+                <form action="#"
+                th:action="@{/sort}"
+                th:object="${cart}"
+                method="post">
+                    <input type="hidden" name="itemToSort" th:value="${iStat.count}" />  
+                    <input type="hidden" name="name" th:value="*{name}" />  
+                    <input type="submit" name="btnSubmitSort" onclick="sortItem()" value="sort" />
+                </form> 
+                &nbsp;
+                <form action="#"
+                th:action="@{/edit}"
+                th:object="${cart}"
+                method="post">
+                    <input type="text" th:field="*{item}" />
+                    <input type="hidden" name="editItem" th:value="${iStat.count}" />  
+                    <input type="hidden" name="name" th:value="*{name}" />  
+                    <input type="submit" name="btnSubmitEdit" value="edit" />
+                </form> 
+        </ul>
+        <!-- </table> -->
+        <p id="demo">Test</p>
+
+    </body>
+</html>
