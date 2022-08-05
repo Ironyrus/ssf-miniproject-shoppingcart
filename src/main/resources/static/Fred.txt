@@ -1,5 +1,3 @@
 item name, quantity
-apple,6
-iceberg,7
 apple cider,1
-shaving cream,5
+apple,1

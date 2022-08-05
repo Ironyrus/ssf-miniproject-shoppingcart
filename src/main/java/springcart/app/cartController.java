@@ -34,8 +34,13 @@ public class cartController {
         return "index";
     }
 
+    // @PostMapping("/showCart")
+    // public String showCart(@ModelAttribute Cart cart, Model model) {
+    //     //System.out.println(cart.getName());
+    //     return "sandy";
+    // }
 
-    ///DELETE
+    //DELETE
     @PostMapping("/showCart")
     public String showCart(
             @ModelAttribute Cart cart,
@@ -62,8 +67,8 @@ public class cartController {
     public String delete(
         Model model,
         @ModelAttribute Cart cart,
-        @RequestParam("deletedItem") int deletedItem) { //When user presses the 3rd delete button, return "2"
-
+        @RequestParam("delete") int deletedItem) { //When user presses the 3rd delete button, return "2"
+        
         Path path = Paths.get("./src/main/resources/static/" + cart.getName() + ".txt");
         showCart.readFile(path); //function in showCart.java
         // if(cart.getItem().equals("") || cart.getItem() == null) { //If item is left empty, return the username's current cart 
@@ -88,8 +93,10 @@ public class cartController {
     public String sort(
                 Model model,
                 @ModelAttribute Cart cart,
-                @RequestParam("itemToSort") int sortedItem) {
-                    
+                @RequestParam("itemToSort") int sortedItem,
+                @RequestParam("name") String name) {
+                    System.out.println(">>>>>>>>>>>>>>>> In SORT method: " + sortedItem);
+                    System.out.println(">>>>>>>>>>>>>>>> In SORT method: " + name + " " + cart.getName());
                     Path path = Paths.get("./src/main/resources/static/" + cart.getName() + ".txt");
                     showCart.readFile(path); //function in showCart.java
                     System.out.println(sortedItem);

@@ -6,6 +6,7 @@
 
     </head>
     <body>
+        <!-- th:object must be same name as model class name!! Except for all lowercase!!! -->
         <form action="#"
             th:action="@{/showCart}"
             th:object="${cart}"
@@ -25,15 +26,15 @@
         <ul th:each="item, iStat: ${data}" class="form-inline">
             <!-- <form action="delete" method="post" class="form-inline"> -->
                 <li data-th-text="${item}" id="item"></li> <!--Displays each item from the cart-->
-                <form   action="#"
-                        th:action="@{/delete}"
-                        th:object="${cart}"
-                        method="post"> 
+                <form action="#"
+                    th:action="@{/delete}"
+                    th:object="${cart}"
+                    method="post">  
                         &nbsp;&nbsp; 
-                    <input type="hidden" name="deletedItem" th:value="${iStat.count}" /> <!-- Submits index to server based on which delete button was pressed -->
+                    <input type="hidden" name="delete" th:value="${iStat.count}" /> <!-- Submits index to server based on which delete button was pressed -->
                     <input type="hidden" name="name" th:value="*{name}" />
                     <!-- <input type="hidden" name="item" th:value="*{item}" /> -->
-                    <input type="submit" name="btnSubmit" onclick="deleteItem()" value="delete" />
+                    <input type="submit" name="btnSubmit" onclick="deletxeItem()" value="delete" />
                 </form>
                 &nbsp;
                 <form action="#"
@@ -56,7 +57,7 @@
                 </form> 
         </ul>
         <!-- </table> -->
-        <p id="demo">Test</p>
+        <p id="demo" th:text="${name}"></p>
 
     </body>
 </html>
